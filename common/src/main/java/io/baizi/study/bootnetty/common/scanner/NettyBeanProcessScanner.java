@@ -44,7 +44,7 @@ public class NettyBeanProcessScanner implements BeanPostProcessor {
                 }
             }
         }
-        return null;
+        return bean;
     }
 
 }

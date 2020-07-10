@@ -1,6 +1,7 @@
 package io.baizi.study.bootnetty.client;
 
 import com.google.protobuf.GeneratedMessageV3;
+import io.baizi.study.bootnetty.common.protobuf.MessageBuilder;
 import io.baizi.study.bootnetty.common.protobuf.MessageModule;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -11,7 +12,6 @@ import io.netty.handler.codec.protobuf.ProtobufDecoder;
 import io.netty.handler.codec.protobuf.ProtobufEncoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
-import org.springframework.stereotype.Component;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -22,7 +22,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @author juwencheng
  * @date 2020 2020/7/9 7:42 下午
  */
-@Component
 public class Client {
     private ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 
@@ -114,6 +113,6 @@ public class Client {
      * @param messageData 数据内容
      */
     public void sendMessage(String module, String cmd, GeneratedMessageV3 messageData) {
-//        this.channel.writeAndFlush(MessageBuilder.getRequestMessage(module, cmd, messageData));
+        this.channel.writeAndFlush(MessageBuilder.buildRequestMessage(module, cmd, messageData));
     }
 }
